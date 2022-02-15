@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import { v4 as uuidv4 } from "uuid";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { AppContext } from "../../App";
 
-export const TodoForm = ({ setTodos }) => {
+export const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [dueDate, setDueDate] = useState(Date.now());
   const [error, setError] = useState();
+
+  const { setTodos } = useContext(AppContext);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -25,11 +28,10 @@ export const TodoForm = ({ setTodos }) => {
           dueDate,
         },
       ];
+      localStorage.setItem("todoItems", JSON.stringify(newTodos));
 
       setTodos(newTodos);
       setError();
-
-      localStorage.setItem("todoItems", JSON.stringify(newTodos));
     } else {
       setError("Please complete form");
     }
