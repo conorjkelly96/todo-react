@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import { AppContext } from "../../App";
+import { useTodos } from "../../hooks/useTodos";
 import { TodoCard } from "../TodoCard";
 
 export const Todos = ({ onDelete }) => {
   // To use useContext hook in React.js
-  const { todos } = useContext(AppContext);
+  // presentational component
+  const { todos } = useTodos();
 
+  // stateful
   return (
     <section className="container d-flex flex-wrap justify-content-center">
       {todos.map((todo) => (
