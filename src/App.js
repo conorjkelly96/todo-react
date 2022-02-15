@@ -4,6 +4,9 @@ import { Header } from "./components/Header";
 import { TodoForm } from "./components/TodoForm";
 import { Todos } from "./components/Todos";
 
+// 1. Create Context - allows for the boundary / access to the components
+const AppContext = React.createContext();
+
 export const App = () => {
   const [todos, setTodos] = useState(
     JSON.parse(localStorage.getItem("todoItems")) || []
@@ -23,12 +26,14 @@ export const App = () => {
 
   return (
     <div>
+      <AppContext.Provider value={}>
       <Header title="My ToDo Items" todoCount={todos.length} />
       <TodoForm setTodos={setTodos} />
       <Todos
         todos={JSON.parse(localStorage.getItem("todoItems")) || []}
         onDelete={onDelete}
       />
+      </AppContext.Provider>
     </div>
   );
 };
