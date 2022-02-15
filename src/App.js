@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { Header } from "./components/Header";
 import { TodoForm } from "./components/TodoForm";
@@ -26,13 +26,13 @@ export const App = () => {
 
   return (
     <div>
-      <AppContext.Provider value={}>
-      <Header title="My ToDo Items" todoCount={todos.length} />
-      <TodoForm setTodos={setTodos} />
-      <Todos
-        todos={JSON.parse(localStorage.getItem("todoItems")) || []}
-        onDelete={onDelete}
-      />
+      <AppContext.Provider value={todos}>
+        <Header title="My ToDo Items" todoCount={todos.length} />
+        <TodoForm setTodos={setTodos} />
+        <Todos
+          todos={JSON.parse(localStorage.getItem("todoItems")) || []}
+          onDelete={onDelete}
+        />
       </AppContext.Provider>
     </div>
   );
